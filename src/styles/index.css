@@ -1,12 +1,59 @@
+body {
+  text-align: center;
+  margin: 30px;
+  padding: 30px;
+  background: antiquewhite;
+}
 
-/* 
+h1,
+h2 {
+  font-family: monospace;
+  margin-bottom: 30px;
+  color: brown;
+  font-size: 39px;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+form {
+  margin-bottom: 24px;
+}
 
-*/
+section {
+  margin: 0px auto;
+  padding: 20px;
+  max-width: 600px;
+  border: solid 1px;
+  border-color: #8080802b;
+  background: beige;
+  border-radius: 3px;
+  box-shadow: 2px 2px 15px rgb(0 0 0 / 66%);
+}
+
+input {
+  border-radius: 9px;
+  background: #00800047;
+  padding: 8px;
+  font-size: 16px;
+}
+
+p {
+  text-align: left;
+  margin-bottom: 1rem;
+  border-bottom: inset;
+  color: chocolate;
+  padding: 18px;
+}
+
+button {
+  float: right;
+  display: none;
+  border: none;
+  background: beige;
+}
+
+p:hover button {
+  display: inline-block;
+}
+
+span {
+  font-size: 24px;
+}
