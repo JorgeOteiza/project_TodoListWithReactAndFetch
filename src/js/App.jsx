@@ -1,5 +1,7 @@
+//
+
 import React from "react";
-import { useFetch } from "../useFetch";
+import { useFetch } from "./useFetch";
 import "../../styles/index.css";
 
 export function App() {

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/index.css";
 
-const Home = () => {
+export const Home = () => {
   const [todoListData, setTodoListData] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
@@ -93,5 +93,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;
