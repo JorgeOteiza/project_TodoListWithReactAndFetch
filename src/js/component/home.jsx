@@ -51,9 +51,31 @@ const Home = () => {
     setTodoListData(todoListData.filter((value) => value !== todoItemToDelete));
   };
 
+  const updateTodoList = (todos) => {
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/alesanchezr", {
+      method: "PUT",
+      body: JSON.stringify(todos),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data); // Acá puedo agregar más lógica si es necesario
+      })
+      .catch((error) => {
+        console.log(error); // Manejo de errores
+      });
+  };
+
+  const handleSaveList = () => {
+    // Llama a la función de actualización con la lista de tareas pendientes
+    updateTodoList(todoListData);
+  };
+
   return (
     <div>
-      <h1>LISTA</h1>
+      <h1>LISTA DE TAREAS</h1>
       <form onSubmit={addTodoItem}>
         <input
           name="todoInput"
@@ -66,6 +88,8 @@ const Home = () => {
         />
       </form>
       <section id="todoList">{printList()}</section>
+      <button onClick={handleSaveList}>Guardar Lista</button>{" "}
+      {/* Agregar botón para guardar la lista */}
     </div>
   );
 };
