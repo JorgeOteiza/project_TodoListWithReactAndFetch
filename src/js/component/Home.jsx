@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/index.css";
+import { useFetch } from "../useFetch";
 
 export const Home = () => {
   const [todoListData, setTodoListData] = useState([]);
   const [inputValue, setInputValue] = useState("");
 
+  useEffect(() => {
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/gogi")
+      .then((res) => res.json())
+      .then(setTodoListData);
+  }, []);
+
   const printList = () => {
     return todoListData.length > 0 ? (
-      todoListData.map((todoText, index) => (
+      todoListData.map(({ label: todoText, done }, index) => (
         <article key={index}>
           <p
             onMouseEnter={(e) =>
@@ -39,20 +46,8 @@ export const Home = () => {
       </p>
     );
   };
-
-  const addTodoItem = (event) => {
-    event.preventDefault();
-    if (!inputValue.trim()) return;
-    setTodoListData([...todoListData, inputValue]);
-    setInputValue("");
-  };
-
-  const deleteTodoItem = (todoItemToDelete) => {
-    setTodoListData(todoListData.filter((value) => value !== todoItemToDelete));
-  };
-
   const updateTodoList = (todos) => {
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/alesanchezr", {
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/gogi", {
       method: "PUT",
       body: JSON.stringify(todos),
       headers: {
@@ -66,6 +61,37 @@ export const Home = () => {
       .catch((error) => {
         console.log(error); // Manejo de errores
       });
+  };
+
+  const addTodoItem = (event) => {
+    event.preventDefault();
+    if (!inputValue.trim()) return;
+    const newTodoItem = {
+      label: inputValue,
+      done: false,
+    };
+    setTodoListData([...todoListData, newTodoItem]);
+
+    fetch("https://playground.4geeks.com/apis/fake/todos/user/gogi", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify([...todoListData, newTodoItem]),
+    }).then((res) => {
+      console.log(res.ok);
+    });
+
+    setInputValue("");
+  };
+
+  const deleteTodoItem = (todoItemToDelete) => {
+    const resultFilter = todoListData.filter(
+      ({ label: value }) => value !== todoItemToDelete
+    );
+    setTodoListData(resultFilter);
+
+    updateTodoList(resultFilter);
   };
 
   const handleSaveList = () => {

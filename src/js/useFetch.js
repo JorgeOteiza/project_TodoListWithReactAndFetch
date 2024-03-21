@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useFetch(url) {
+export const useFetch = (url, { method = "GET", body }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,14 @@ export function useFetch(url) {
     setController(abortController);
     setLoading(true);
 
-    fetch(url, { signal: abortController.signal })
+    fetch(
+      url,
+      {
+        method,
+        body: body ? JSON.stringify(body) : undefined,
+      },
+      { signal: abortController.signal }
+    )
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => {
@@ -35,4 +42,4 @@ export function useFetch(url) {
   };
 
   return { data, loading, error };
-}
+};
