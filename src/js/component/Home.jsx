@@ -56,31 +56,42 @@ export const Home = () => {
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data); // Acá puedo agregar más lógica si es necesario
+        console.log(data);
       })
       .catch((error) => {
-        console.log(error); // Manejo de errores
+        console.log(error);
       });
   };
 
-  const addTodoItem = (event) => {
+  const addTodoItem = async (event) => {
     event.preventDefault();
     if (!inputValue.trim()) return;
     const newTodoItem = {
       label: inputValue,
       done: false,
     };
-    setTodoListData([...todoListData, newTodoItem]);
 
-    fetch("https://playground.4geeks.com/apis/fake/todos/user/gogi", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify([...todoListData, newTodoItem]),
-    }).then((res) => {
-      console.log(res.ok);
-    });
+    try {
+      const response = await fetch(
+        "https://playground.4geeks.com/apis/fake/todos/user/gogi",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTodoItem),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al agregar tarea");
+      }
+
+      const data = await response.json();
+      setTodoListData([...todoListData, data]);
+    } catch (error) {
+      console.error(error);
+    }
 
     setInputValue("");
   };
