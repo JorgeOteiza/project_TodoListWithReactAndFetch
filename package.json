@@ -2,7 +2,7 @@
   "name": "react-hello",
   "version": "1.0.1",
   "engines": {
-    "node": "16.x"
+    "node": "16.20.2"
   },
   "description": "",
   "main": "index.js",
@@ -47,8 +47,8 @@
   },
   "babel": {
     "presets": [
-      "env",
-      "react"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties",
