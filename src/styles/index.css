@@ -24,15 +24,18 @@ section {
   border: solid 1px;
   border-color: #8080802b;
   background: beige;
-  border-radius: 3px;
+  border-radius: 9px;
   box-shadow: 2px 2px 15px rgb(0 0 0 / 66%);
 }
 
 input {
   border-radius: 9px;
+  border-color: chocolate;
   background: #00800047;
   padding: 8px;
+  padding-left: 18px;
   font-size: 16px;
+  width: 30%;
 }
 
 p {

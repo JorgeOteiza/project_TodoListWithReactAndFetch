@@ -101,12 +101,12 @@ export const Home = () => {
 
   return (
     <div>
-      <h1>LISTA DE TAREAS</h1>
+      <h1>TODOLIST</h1>
       <form onSubmit={addTodoItem}>
         <input
           name="todoInput"
           id="todoInput"
-          placeholder="Agregar nuevo"
+          placeholder="Agregar tarea"
           autoFocus
           type="text"
           value={inputValue}
